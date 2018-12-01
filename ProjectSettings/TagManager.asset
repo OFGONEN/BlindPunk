@@ -8,6 +8,7 @@ TagManager:
   - Trap
   - Platform
   - Door
+  - GroundReset
   layers:
   - Default
   - TransparentFX

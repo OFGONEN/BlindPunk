@@ -93,16 +93,21 @@ public class PlayerController : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //If we are on the air and we are colliding with groundd or a platfrom , which means that we are on the ground now.
-        if(!_is_grounded && (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Platform") && rb.velocity.y == 0)
-        {
-            _is_grounded = true;
-        }
-        else if(collision.gameObject.tag == "Trap") // If we collide with a trap , kill the player and end the game.
+       
+        if(collision.gameObject.tag == "Trap") // If we collide with a trap , kill the player and end the game.
         {
             _can_move = false;
             Stop();
             // Endgame
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        //If we are on the air and we are colliding with groundd or a platfrom , which means that we are on the ground now.
+        if (!_is_grounded && collision.gameObject.tag == "GroundReset"  && rb.velocity.y == 0)
+        {
+            _is_grounded = true;
         }
     }
 
