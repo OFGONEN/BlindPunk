@@ -31,11 +31,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _GradientOffset: 154
-    - _NoiseFreq: 3
-    - _NoiseMult: 1
-    - _NoiseSpeed: 3.3
-    - _PixelOffset: 0.03
-    - _Radius: 200
+    - _GradientOffset: 0
+    - _NoiseFreq: 0
+    - _NoiseMult: 0
+    - _NoiseSpeed: 0
+    - _PixelOffset: 0
+    - _Radius: 1000
     m_Colors:
-    - _PlayerPos: {r: 360.98685, g: 202.96802, b: 722, a: 406}
+    - _PlayerPos: {r: 565.9927, g: 318.50003, b: 1132, a: 637}
