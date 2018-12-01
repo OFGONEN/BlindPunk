@@ -10,16 +10,16 @@ public class Counter : MonoBehaviour {
     public static Counter instance;
     public Text _text_counter;
 
-    public float _time_round;
+    public float _time_round; // Time for round
 
-    public float _time_star_3;
-    public float _time_star_2;
-    public float _time_star_1;
-    public float _time_star_0;
+    public float _time_star_3; // Time pass for getting 3 stars
+    public float _time_star_2; // Time pass for getting 2 stars
+    public float _time_star_1; // Time pass for getting 1 stars
+    public float _time_star_0; // Time pass for getting 0 stars
 
-    public float _counter;
+    public float _counter; // Counter for time
 
-    private bool _can_counter;
+    private bool _can_counter; // Can counter or not. Cant count if game pauses or ends.
 
     #endregion
 
@@ -40,12 +40,14 @@ public class Counter : MonoBehaviour {
 	
 	void Update () 
 	{
+        // Counts every frame , convert float to integer and updates UI for counter.
         if (_can_counter)
         {
             _counter -= Time.deltaTime;
             _text_counter.text = "" + (int)_counter;
         }
 
+        // If player consumes all the time , game ends.
         if (_counter <= 0.05f)
         {
             _can_counter = false;
@@ -55,6 +57,7 @@ public class Counter : MonoBehaviour {
 
     #region Methods
 
+    // Pauses the counter.
     public void TooglePause(int pause)
     {
         if(pause == 1)
