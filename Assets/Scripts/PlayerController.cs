@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
 
     bool _can_move = true;
 
-	#endregion
+    #endregion
 
     #region Methods
     public void Move(float _horizontalMove)
@@ -61,8 +61,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void Crouch()
-    { 
-        if( _is_grounded && Physics2D.OverlapBox(_cord_bottom.position, Vector2.one, LayerMask.NameToLayer("Platform")))
+    {
+        if (_is_grounded && Physics2D.OverlapBox(_cord_bottom.position , Vector2.one, 0 , 2048))
         {
             _is_grounded = false;
             collider.isTrigger = true;
