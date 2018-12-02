@@ -8,6 +8,8 @@ TagManager:
   - Trap
   - Platform
   - Door
+  - GroundReset
+  - GameLogic
   layers:
   - Default
   - TransparentFX
