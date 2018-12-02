@@ -10,6 +10,8 @@ TagManager:
   - Door
   - GroundReset
   - GameLogic
+  - Saw
+  - Giyotin
   layers:
   - Default
   - TransparentFX

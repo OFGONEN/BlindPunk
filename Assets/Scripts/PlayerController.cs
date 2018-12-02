@@ -8,11 +8,8 @@ public class PlayerController : MonoBehaviour {
     #region Variables
     public Rigidbody2D rb; // Rigidbody of player.
     public BoxCollider2D collider; // Collider of player.
-    public Animator _anim_cam; // Animator of Camera
     public Transform _cord_bottom; // Cordinate of feet of player.
-
-    public Animation anim;
-
+    public Animator _anim_player; // Animator of the player.
     public float _amount_speed; // Speed of movement.
     public float _amount_jump; // Jump force. It decides of heigh player can jump.
 
@@ -34,13 +31,13 @@ public class PlayerController : MonoBehaviour {
 
             if ((Mathf.Approximately(rb.velocity.x, 0) && Mathf.Approximately(rb.velocity.y, 0)) && _is_cover_on) // If we are stand still and there is visual cover on , we need to turn visual cover off.
             {
-                //Uncover
-                VisualCoverControl.instance.ChangeSign();
+                //Uncover effect
+                VisualCoverControl.instance.ChangeSign(); 
                 _is_cover_on = false;
             }
             else if (rb.velocity != Vector2.zero && !_is_cover_on) // If we are moving and there is no visual cover , we need to turn visual cover on.
             {
-                //Cover
+                //Cover effect
                 VisualCoverControl.instance.ChangeSign();
                 _is_cover_on = true;
             }
