@@ -36,11 +36,22 @@ public class VisualCoverControl : MonoBehaviour {
         percent = Mathf.Clamp(percent, 0f, 1f); // Keeps the effect between 0 and 1 no matter what.
     }
 
+    //We have this method because when ever player stops or start moving it need to alert this script and change sign value.
     public void ChangeSign()
     {
         sign *= -1;
     }
 
+
+    // Magic
+    float getMappedValue(float val, Vector2 toConvert)
+    {
+        return (val * (toConvert.y - toConvert.x)) + toConvert.x;
+
+    }
+
+
+    // More Magic
     private void OnRenderImage( RenderTexture source, RenderTexture destination )
 	{
 		Vector2 k = Camera.current.WorldToScreenPoint( player.transform.position );
@@ -56,12 +67,7 @@ public class VisualCoverControl : MonoBehaviour {
 		Graphics.Blit( source, destination, mat );
 	}
 
-
-	float getMappedValue(float val, Vector2 toConvert)
-	{
-		return ( val * ( toConvert.y - toConvert.x ) ) + toConvert.x;
-
-	}
+    
 
 
 }

@@ -12,6 +12,9 @@ TagManager:
   - GameLogic
   - Saw
   - Giyotin
+  - Spike
+  - Boulder
+  - Gate
   layers:
   - Default
   - TransparentFX
@@ -25,7 +28,7 @@ TagManager:
   - Player
   - Traps
   - Platform
-  - 
+  - Boulder
   - 
   - 
   - 
