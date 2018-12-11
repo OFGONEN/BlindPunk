@@ -103,6 +103,8 @@ public class PlayerController : MonoBehaviour {
 
     void AnimationControl()
     {
+        _anim_player.SetFloat("VerticalSpeed", rb.velocity.y);
+
         if (Mathf.Approximately(rb.velocity.y, 0))
         {
             if (Mathf.Approximately(rb.velocity.x, 0))
