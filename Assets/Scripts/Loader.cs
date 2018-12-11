@@ -1,6 +1,7 @@
 ﻿/*
 Created By OFGONEN
 */
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,11 +24,16 @@ public class Loader : MonoBehaviour {
 	{
         if (Input.GetKeyDown("r"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            RestartSameLevel();
         }		
 	}
 
     #region Methods
+    public void RestartSameLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void LoadLevel(int level)
     {
         SceneManager.LoadScene(level);
@@ -36,6 +42,18 @@ public class Loader : MonoBehaviour {
     public void LoadNextLevel()
     {
         Loader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1); // Loads the next level
+    }
+
+    public void RestartAfterDelay(int seconds)
+    {
+        StartCoroutine(Delay(seconds));
+        RestartSameLevel();
+    }
+
+    IEnumerator Delay(int seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        
     }
     #endregion
 }

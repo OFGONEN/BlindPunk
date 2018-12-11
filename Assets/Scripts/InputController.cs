@@ -28,11 +28,11 @@ public class InputController : MonoBehaviour {
     {
 
         // Gets the raw value of input for horizontal. We want an arcadey feeling so we dont want acceleration.
-        if(joystick.Horizontal >= .2f)
+        if(joystick.Horizontal >= 0.1f)
         {
             _horizontalMove = 1;
         }
-        else if(joystick.Horizontal <= -.2f)
+        else if(joystick.Horizontal <= -0.1f)
         {
             _horizontalMove = -1;
         }

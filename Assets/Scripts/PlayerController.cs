@@ -146,11 +146,14 @@ public class PlayerController : MonoBehaviour {
             {
                 _can_move = false;
                 Stop();
-                _anim_player.SetTrigger("Dying"); // We are dead , we need to  act like it.
+                _anim_player.SetTrigger("Dying"); // We are dead.
                 // GameLogic Endgame
+                Loader.instance.RestartAfterDelay(5);
             }
         }
     }
+
+    
 
     private void OnTriggerStay2D(Collider2D collision)
     {
