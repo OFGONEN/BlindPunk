@@ -32,5 +32,10 @@ public class Loader : MonoBehaviour {
     {
         SceneManager.LoadScene(level);
     }
+
+    public void LoadNextLevel()
+    {
+        Loader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1); // Loads the next level
+    }
     #endregion
 }

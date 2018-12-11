@@ -53,9 +53,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4862486504166442}
   - component: {fileID: 60086839039386804}
+  - component: {fileID: 114858718344499548}
   m_Layer: 8
   m_Name: Object
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,8 +157,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.820511, y: 0.29524034}
-      - {x: -0.8183886, y: 0.29539582}
+    - - {x: 0.820511, y: 0.29}
+      - {x: -0.83, y: 0.29}
       - {x: -0.29204842, y: -0.2116938}
       - {x: 0.08007935, y: -0.20900607}
 --- !u!61 &61410132323141960
@@ -172,7 +173,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.35}
+  m_Offset: {x: 0, y: 0.33}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -203,6 +204,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114858718344499548
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1538522475294486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0654bdfef5c199498aa2c78aa8e15d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114893658936248634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -296,7 +308,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 7edf10ef888bb174c9e7f210d0618dcf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
