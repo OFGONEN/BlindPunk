@@ -15,6 +15,7 @@ TagManager:
   - Spike
   - Boulder
   - Gate
+  - SpikeTrap
   layers:
   - Default
   - TransparentFX
