@@ -20,7 +20,12 @@ public class PlayerController : MonoBehaviour {
     bool _can_move = true; // Can player move.
 
     #endregion
-  
+
+    private void FixedUpdate()
+    {
+        AnimationControl();
+    }
+
     #region Methods
     public void Move(float _horizontalMove)
     { 
@@ -28,18 +33,16 @@ public class PlayerController : MonoBehaviour {
         if (_can_move)
         {
             rb.velocity = new Vector2(_horizontalMove * _amount_speed, rb.velocity.y); // Changes the horizontal speed of player without changing its vertical speed.
-
-            if ((Mathf.Approximately(rb.velocity.x, 0) && Mathf.Approximately(rb.velocity.y, 0)) && _is_cover_on) // If we are stand still and there is visual cover on , we need to turn visual cover off.
+            
+            if ( _is_cover_on && (Mathf.Approximately(rb.velocity.x, 0) && Mathf.Approximately(rb.velocity.y, 0)) ) // If we are stand still and there is visual cover on , we need to turn visual cover off.
             {
                 //Uncover effect
-                _anim_player.SetTrigger("Idle");
                 VisualCoverControl.instance.ChangeSign(); 
                 _is_cover_on = false;
             }
             else if (rb.velocity != Vector2.zero && !_is_cover_on) // If we are moving and there is no visual cover , we need to turn visual cover on.
             {
                 //Cover effect
-                _anim_player.SetTrigger("Running");
                 VisualCoverControl.instance.ChangeSign();
                 _is_cover_on = true;
             }
@@ -62,7 +65,6 @@ public class PlayerController : MonoBehaviour {
         {
             _is_grounded = false;
             rb.AddForce(new Vector2(0f, _amount_jump)); // We are handling jumping with giving our player force in vertical.
-            _anim_player.SetTrigger("Jumping"); // We started to jumping, we need to animate our jumping
         }
     }
 
@@ -73,7 +75,7 @@ public class PlayerController : MonoBehaviour {
         {
             _is_grounded = false; // Since we are falling we need to declare ourself as airbone.
             collider.isTrigger = true;
-            _anim_player.SetTrigger("Jumping"); // We started to falling , we need to animate our falling with jumping animation.
+
         }
     }
 
@@ -99,6 +101,39 @@ public class PlayerController : MonoBehaviour {
         rb.velocity = Vector2.zero;
     }
 
+    void AnimationControl()
+    {
+        if (Mathf.Approximately(rb.velocity.y, 0))
+        {
+            if (Mathf.Approximately(rb.velocity.x, 0))
+            {
+                _anim_player.SetTrigger("Idle");
+            }
+            else
+            {
+                _anim_player.SetTrigger("Running");
+            }
+        }
+        else
+        {
+            if (transform.parent == null)
+            {
+                _anim_player.SetTrigger("Jumping");
+            }
+            else
+            {
+                if (Mathf.Approximately(rb.velocity.x, 0))
+                {
+                    _anim_player.SetTrigger("Idle");
+                }
+                else
+                {
+                    _anim_player.SetTrigger("Running");
+                }
+            }
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
        
@@ -117,17 +152,8 @@ public class PlayerController : MonoBehaviour {
     private void OnTriggerStay2D(Collider2D collision)
     {
         //If we are on the air and we are colliding with groundd or a platfrom , which means that we are on the ground now.
-        if (!_is_grounded && collision.gameObject.tag == "GroundReset"  && rb.velocity.y == 0)
+        if (collision.gameObject.tag == "GroundReset")
         {
-            if(rb.velocity != Vector2.zero)
-            {
-                _anim_player.SetTrigger("Running");
-            }
-            else
-            {
-                _anim_player.SetTrigger("Idle");
-            }
-                
             _is_grounded = true;
         }
     }

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61493486823845252}
   - component: {fileID: 114616092359526746}
   m_Layer: 0
-  m_Name: GateToLevel
+  m_Name: Gate
   m_TagString: Gate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c4a25a29647918498fa6a9021c7e45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level_to_Load: 0
+  player: {fileID: 0}
+  startingGate: 0
 --- !u!212 &212653181147067842
 SpriteRenderer:
   m_ObjectHideFlags: 1

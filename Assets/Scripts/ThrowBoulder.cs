@@ -15,7 +15,7 @@ public class ThrowBoulder : MonoBehaviour {
 		if(counter + boulderThrowRate < Time.time)
 		{
 			counter = Time.time;
-			GameObject boulder = Instantiate( boulderPrefab, position, Quaternion.identity) as GameObject;
+			Instantiate( boulderPrefab, position, Quaternion.identity);
 		}
 
 

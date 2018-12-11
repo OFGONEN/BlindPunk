@@ -22,15 +22,9 @@ public class InputController : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
     }
-	
-	void Update () 
-	{
-        // Gets the raw value of input for horizontal. We want an arcadey feeling so we dont want acceleration.
-        _horizontalMove = Input.GetAxisRaw("Horizontal"); 
-        
-         playerController.Move(_horizontalMove); // Passases the value to player controller to move.
-        
 
+    private void Update()
+    {
         // You cant jump and fall down at the same time. So we handeled it with else if so  that only one input can passeses to player controller.
         if (Input.GetButtonDown("Jump"))
         {
@@ -42,9 +36,15 @@ public class InputController : MonoBehaviour {
             Debug.Log("Crouch");
             playerController.Crouch(); // Lets player controller to crouch so it can fall down from a platform.
         }
+    }
 
-
-
+    void FixedUpdate () 
+	{
+        // Gets the raw value of input for horizontal. We want an arcadey feeling so we dont want acceleration.
+        _horizontalMove = Input.GetAxisRaw("Horizontal"); 
+        
+         playerController.Move(_horizontalMove); // Passases the value to player controller to move.
+        
     }
 
     #region Methods

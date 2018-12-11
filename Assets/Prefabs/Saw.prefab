@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 61685921741732874}
   m_Layer: 10
   m_Name: Object
-  m_TagString: Untagged
+  m_TagString: Saw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 95940649796727142}
   m_Layer: 10
   m_Name: GFX
-  m_TagString: Untagged
+  m_TagString: Saw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

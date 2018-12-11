@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 212433547478604040}
   m_Layer: 10
   m_Name: GFX
-  m_TagString: Untagged
+  m_TagString: Boulder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
