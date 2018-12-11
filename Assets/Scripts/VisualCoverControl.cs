@@ -15,7 +15,7 @@ public class VisualCoverControl : MonoBehaviour {
 	public Vector2 noiseOffset;
 	public Vector2 gradientOffset;
 
-    public float sign = 1;
+    public float sign; // Determines the increment or disincrement of visual cover effect. If sign is 1 effect increces.
 
 	public Material mat;
     public GameObject player;
@@ -30,16 +30,28 @@ public class VisualCoverControl : MonoBehaviour {
 
     private void Update()
     {
+        //We start with sign -1 and percent 0 which means 0 visual effect at the start.When ever sign is 1 visual effect increces over time and reaches it fullest in 1 second.
+        //If sign is -1 visual effect decreaases over time and fully wears off at 0.
         percent += sign * Time.deltaTime;
-
-        percent = Mathf.Clamp(percent, 0f, 1f);
+        percent = Mathf.Clamp(percent, 0f, 1f); // Keeps the effect between 0 and 1 no matter what.
     }
 
+    //We have this method because when ever player stops or start moving it need to alert this script and change sign value.
     public void ChangeSign()
     {
         sign *= -1;
     }
 
+
+    // Magic
+    float getMappedValue(float val, Vector2 toConvert)
+    {
+        return (val * (toConvert.y - toConvert.x)) + toConvert.x;
+
+    }
+
+
+    // More Magic
     private void OnRenderImage( RenderTexture source, RenderTexture destination )
 	{
 		Vector2 k = Camera.current.WorldToScreenPoint( player.transform.position );
@@ -55,12 +67,7 @@ public class VisualCoverControl : MonoBehaviour {
 		Graphics.Blit( source, destination, mat );
 	}
 
-
-	float getMappedValue(float val, Vector2 toConvert)
-	{
-		return ( val * ( toConvert.y - toConvert.x ) ) + toConvert.x;
-
-	}
+    
 
 
 }
