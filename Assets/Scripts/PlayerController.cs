@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour {
 
     void AnimationControl()
     {
-        _anim_player.SetFloat("VerticalSpeed", rb.velocity.y);
+        _anim_player.SetFloat("VerticalSpeed", Mathf.Abs(rb.velocity.y));
 
         if (Mathf.Approximately(rb.velocity.y, 0))
         {
@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
+
             if (transform.parent == null)
             {
                 _anim_player.SetTrigger("Jumping");

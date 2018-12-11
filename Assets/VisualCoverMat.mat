@@ -38,4 +38,4 @@ Material:
     - _PixelOffset: 0
     - _Radius: 1000
     m_Colors:
-    - _PlayerPos: {r: 575.00006, g: 323.5001, b: 1150, a: 647}
+    - _PlayerPos: {r: 800.0034, g: 446.4233, b: 1600, a: 900}
