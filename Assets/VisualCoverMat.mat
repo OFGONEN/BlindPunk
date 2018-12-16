@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: VisualCoverMat
-  m_Shader: {fileID: 4800000, guid: b4cf2759321d13b4cb41ca449ac4e940, type: 3}
+  m_Shader: {fileID: 4800000, guid: b2a169f15ba487e4fbabcb41f74ccee2, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -27,15 +27,22 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: 14d29ddea5e1fee47baa353bcc7af754, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex2:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _GradientOffset: 0
-    - _NoiseFreq: 0
-    - _NoiseMult: 0
-    - _NoiseSpeed: 0
-    - _PixelOffset: 0
-    - _Radius: 1000
+    - _GradientOffset: 31.430851
+    - _NoiseFreq: 2
+    - _NoiseFreq2: 0
+    - _NoiseMult: 2.5
+    - _NoiseRim: 0
+    - _NoiseSpeed: 3.3
+    - _PixelOffset: 0.07
+    - _Radius: 826.518
     m_Colors:
-    - _PlayerPos: {r: 573.4994, g: 322.5004, b: 1147, a: 645}
+    - _NoiseRimColor: {r: 0, g: 0, b: 0, a: 0}
+    - _PlayerPos: {r: 619.0077, g: 436.81805, b: 1214, a: 909}

@@ -2,7 +2,7 @@
 
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "Hidden/EyeEffect"
+Shader "Custom/ThisIsTheShit"
 {
 	Properties
 	{
@@ -16,7 +16,13 @@ Shader "Hidden/EyeEffect"
 		_PixelOffset("Pixel Offset", Range(0,1)) = 0
 		_GradientOffset("GradientOffset", Range(0,200)) = 0
 
-		_ColorGrading("Try", 2D) = "white" {}
+		
+		_NoiseTex2("Noise2 Tex", 2D) = "white" {}
+		_NoiseFreq2("Noise2 Frequency", Range(0.1,5)) = 0
+		_NoiseRim("Noise2 Rim Mult", float) = 0
+		_NoiseRimColor("Noise2 Rim Color", Color) = (0,0,0,0)
+
+		//_ColorGrading("Try", 2D) = "white" {}
 	}
 	SubShader
 	{
@@ -30,7 +36,7 @@ Shader "Hidden/EyeEffect"
 			#pragma fragment frag
 			#define M_PI 3.14
 			#include "UnityCG.cginc"
-			#include "noiseSimplex.cginc"
+	
 			struct appdata
 			{
 				float4 vertex : POSITION;
@@ -57,28 +63,18 @@ Shader "Hidden/EyeEffect"
 			
 
 
-			uniform sampler2D _MainTex, _NoiseTex, _ColorGrading;
-			uniform float4  _PlayerPos;
-			uniform float _NoiseFreq, _NoiseMult, _NoiseSpeed, _PixelOffset, _Radius,_GradientOffset;
+			uniform sampler2D _MainTex, _NoiseTex, _ColorGrading, _NoiseTex2;
+			uniform float4  _PlayerPos, _NoiseRimColor;
+			uniform float _NoiseFreq, _NoiseMult, _NoiseSpeed, _PixelOffset, _Radius,_GradientOffset,_NoiseFreq2, _NoiseRim;
+			
 			fixed4 frag (v2f i) : SV_Target
 			{
 
 
-			//	float dist = dot(abs(i.noiseUV - 0.5), abs(i.noiseUV - 0.5));
-			//	float4 rim0 = _RimColor * pow(dist, _RimMult) * 5 * ((1.5 + sin(_Time.x * 30)) / 2);
-			//	float4 rim1 = _RimColor1 * pow(dist, _RimMult) * 5 * ((1.5 + sin(_Time.x * 30)) / 2);
-
-				//float3 spos = float3(i.vertex.x, i.vertex.y, 0) * _NoiseFreq;
-				//float noise = _NoiseMult * ((tex2D(_NoiseTex, i.noiseUV *_NoiseFreq + _Time.x * _NoiseSpeed) + 1) / 2);
-				//float4 noiseToDirection = float4(cos(noise*M_PI * 2), sin(noise*M_PI * 2),0,0);
-				//return tex2D(_MainTex, i.pos + normalize(noiseToDirection));
-
-
-				float3 spos = float3(i.scrPos.x, i.scrPos.y, 0) * _NoiseFreq;
-				spos.z += _Time.x * _NoiseSpeed;
-				float noise = _NoiseMult * snoise(spos);
-				float2 noiseToDirection = float2(cos(noise*M_PI * 2), sin(noise*M_PI * 2));
-				fixed4 col;
+				
+					float noise = _NoiseMult * tex2D(_NoiseTex,  float2(i.scrPos.x , i.scrPos.y) / _NoiseFreq).r;
+					float2 noiseToDirection = float2(cos(noise*M_PI * 2 + _Time.x * _NoiseSpeed), sin(noise*M_PI * 2 + _Time.x * _NoiseSpeed));
+					float4 col;
 
 		
 				float2 pPos = _PlayerPos.xy;
@@ -91,6 +87,26 @@ Shader "Hidden/EyeEffect"
 
 				float greyScale = (colDistorted.x + colDistorted.y + colDistorted.z) / 3;
 				colDistorted = float4(greyScale, greyScale, greyScale, 1);
+
+				
+				float rimNoise = tex2D(_NoiseTex2, i.scrPos * _NoiseFreq2).r;
+				float2 o = float2(0.5, 0.5);
+			
+				float4 rim = _NoiseRimColor * saturate(pow(1 - ((0.5 - rimNoise)), _NoiseRim)) * dot(i.scrPos - o, i.scrPos - o);
+				
+				rim *= -_NoiseRim / 3;
+
+				if (_NoiseRim > -9)
+					rim /= 1.3;
+				if (_NoiseRim > -6)
+					rim /= 3;
+			//	rim = lerp(0, rim, abs(i.scrPos.x - 0.5) + _NoiseRim/15);
+				rim.y += i.scrPos.x/6;
+				rim.z += i.scrPos.y/6;
+			
+
+				
+
 
 
 				// COLOR GRADING
@@ -107,6 +123,7 @@ Shader "Hidden/EyeEffect"
 				else
 					col = colNormal;
 
+				
 				return col;
 
 
